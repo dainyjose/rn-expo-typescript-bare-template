@@ -58,6 +58,28 @@ bun expo run:android   # For Android
 bun expo run:ios       # For iOS
 bun expo start         # Metro bundler
 ```
+### Android Setup
+
+If you see this error when building the Android app:
+SDK location not found. Define a valid SDK location with an ANDROID_HOME environment variable or by setting the sdk.dir path in your project's local properties file.
+
+
+follow these steps:
+
+1. **Open Android Folder in Android Studio**
+   - Open **Android Studio**
+   - Go to **File > Open**
+   - Select the `android/` folder inside the project root
+
+2. **Configure SDK Location**
+   - Go to **Android Studio > Preferences > Appearance & Behavior > System Settings > Android SDK**
+   - Copy the SDK path (e.g. `/Users/<your-username>/Library/Android/sdk`)
+
+3. **Update `local.properties`**
+   Inside the `android/` folder, create or update the `local.properties` file:
+
+   ```properties
+   sdk.dir=/Users/<your-username>/Library/Android/sdk
 
 ---
 
