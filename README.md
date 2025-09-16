@@ -26,6 +26,7 @@ This repository is a bare workflow template for building React Native apps with 
 - Support for Bun as a fast package manager
 
 It’s designed to help you quickly bootstrap production-ready apps without repeating setup steps.
+
 ---
 
 ## Tech Stack
@@ -37,6 +38,7 @@ It’s designed to help you quickly bootstrap production-ready apps without repe
 - ESLint & Prettier
 - Jest & @testing-library/react-native
 - (Optional) Redux Toolkit & React Navigation
+  
 ---
 
 ### Prerequisites
