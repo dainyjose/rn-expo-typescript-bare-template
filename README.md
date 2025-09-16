@@ -1,15 +1,14 @@
-# MyApp
+# rn-expo-typescript-bare-template
 
-A React Native (Expo Bare Workflow) project using **TypeScript**, **Bun**, **ESLint**, **Prettier**, and **Jest** fully structured and scalable.
 
----
 
 ## Table of Contents
 
-- [Getting Started](#getting-started)
+- [Purpose](#purpose)
+- [Tech Stack](#tech-stack)
+- [Prerequisites](#prerequisites)
 - [Project Structure](#project-structure)
 - [Scripts](#scripts)
-- [Tech Stack](#tech-stack)
 - [Linting & Formatting](#linting--formatting)
 - [Testing](#testing)
 - [Environment Variables](#environment-variables)
@@ -17,13 +16,35 @@ A React Native (Expo Bare Workflow) project using **TypeScript**, **Bun**, **ESL
 
 ---
 
-## Getting Started
+## Purpose
+This repository is a bare workflow template for building React Native apps with Expo and TypeScript. It provides a well-structured foundation with:
+
+- Type safety (TypeScript)
+- Linting & formatting (ESLint + Prettier)
+- Testing (Jest + React Native Testing Library)
+- Simple project structure for scalability
+- Support for Bun as a fast package manager
+
+It’s designed to help you quickly bootstrap production-ready apps without repeating setup steps.
+---
+
+## Tech Stack
+
+- React Native (Bare Workflow)
+- Expo SDK
+- TypeScript
+- Bun
+- ESLint & Prettier
+- Jest & @testing-library/react-native
+- (Optional) Redux Toolkit & React Navigation
+---
 
 ### Prerequisites
 
 - **Node.js** (only for installing Expo CLI globally)
 - **Bun** (v1.0+)
 - **Expo CLI** (for initializing and running projects)
+- Xcode / Android Studio for iOS & Android builds
 
 ### Install Expo CLI
 
@@ -116,19 +137,6 @@ bun run lint           # Run ESLint on src/
 bun run format         # Format code with Prettier
 bun run test           # Run unit tests
 ```
-
----
-
-## Tech Stack
-
-- **React Native (bare)**
-- **Expo SDK**
-- **TypeScript**
-- **Bun** (JavaScript runtime)
-- **Jest** for unit testing
-- **ESLint + Prettier** for linting and formatting
-- **React Navigation**
-- **Redux Toolkit** (optional)
 
 ---
 
