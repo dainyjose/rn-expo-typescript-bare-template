@@ -1,41 +1,59 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+def REACT_NATIVE_VERSION = new File(['node', '--print',"JSON.parse(require('fs').readFileSync(require.resolve('react-native/package.json'), 'utf-8')).version"].execute(null, rootDir).text.trim())
 
 buildscript {
     ext {
         buildToolsVersion = findProperty('android.buildToolsVersion') ?: '35.0.0'
         minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '24')
         compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '35')
-        targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '34')
-        kotlinVersion = findProperty('android.kotlinVersion') ?: '1.9.25'
-
-        ndkVersion = "26.1.10909125"
+        targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '35')
+        ndkVersion = "28.2.13676358"
+        kotlinVersion = "2.0.21"
     }
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath('com.android.tools.build:gradle')
+        classpath('com.android.tools.build:gradle:8.6.1')
         classpath('com.facebook.react:react-native-gradle-plugin')
-        classpath('org.jetbrains.kotlin:kotlin-gradle-plugin')
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
     }
 }
 
-apply plugin: "com.facebook.react.rootproject"
+// apply plugin: "com.facebook.react.rootproject"
+
+def reactNativeAndroidDir = new File(
+  providers.exec {
+    workingDir(rootDir)
+    commandLine("node", "--print", "require.resolve('react-native/package.json')")
+  }.standardOutput.asText.get().trim(),
+  "../android"
+)
 
 allprojects {
-    repositories {
-        maven {
-            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-            url(new File(['node', '--print', "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim(), '../android'))
-        }
-        maven {
-            // Android JSC is installed from npm
-            url(new File(['node', '--print', "require.resolve('jsc-android/package.json', { paths: [require.resolve('react-native/package.json')] })"].execute(null, rootDir).text.trim(), '../dist'))
-        }
+    configurations.all {
+        resolutionStrategy {
+            // 🔹 Force React Native version globally
+            force "com.facebook.react:react-native:" + REACT_NATIVE_VERSION
 
+            // 🔹 Substitute problematic libraries with fixed ones
+            dependencySubstitution {
+                substitute(module("com.github.banketree:AndroidLame-kotlin"))
+                    .using(module("com.github.kaushik-naik:TAndroidLame:a485052f28"))
+            }
+        }
+    }
+    repositories {
+        maven {url(reactNativeAndroidDir)}
         google()
         mavenCentral()
         maven { url 'https://www.jitpack.io' }
+        maven { url 'https://maven.google.com' }
+        maven { url 'https://jcenter.bintray.com' }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
 }
+
+apply plugin: "expo-root-project"
+apply plugin: "com.facebook.react.rootproject"

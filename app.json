@@ -2,6 +2,9 @@
   "expo": {
     "name": "MyApp",
     "slug": "MyApp",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "ios": {
+      "bundleIdentifier": "com.anonymous.MyApp"
+    }
   }
 }
